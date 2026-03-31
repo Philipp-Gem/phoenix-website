@@ -13,11 +13,7 @@ const { getCurrentCycleWindow, getNextCycleWindow } = require("../utils/cycleWin
 
 // Discord-Bot (failsafe, wenn nicht verfügbar)
 let discordBot = null;
-try {
-  discordBot = require("../discord-bot");
-} catch {
-  discordBot = { init: async () => false, syncRaid: async () => null };
-}
+discordBot = { syncRaid: async (raidId) => { return fetch("localhost:" + process.env.BOT_PORT + "/sync/" + raidId) } };
 
 /* ------------------------------ Helpers -------------------------------- */
 
@@ -149,7 +145,7 @@ async function create(req, res) {
     const saved = await raids.create(payload);
 
     // Discord Bot sync (nicht kritisch)
-    try { await discordBot.syncRaid(saved); } catch (e) { console.warn("[discord/syncRaid:create]", e?.message || e); }
+    try { await discordBot.syncRaid(saved.id); } catch (e) { console.warn("[discord/syncRaid:create]", e?.message || e); }
 
     // ✨ Enrich für konsistenten Response
     const enriched = await raidService.getById(saved.id);

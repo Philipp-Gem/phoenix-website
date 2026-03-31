@@ -26,9 +26,9 @@ const chars = require("../models/charModel");
 const { getCycleWindowFor } = require("../utils/cycleWindow");
 const { prisma } = require("../prismaClient.js");
 
-// optionaler Bot-Sync
 let discordBot = null;
-try { discordBot = require("../discord-bot"); } catch { discordBot = { syncRaid: async () => null }; }
+discordBot = { syncRaid: async (raidId) => { return fetch("localhost:" + process.env.BOT_PORT + "/sync/" + raidId) } };
+
 
 /* ----------------------------- Helpers ---------------------------------- */
 
