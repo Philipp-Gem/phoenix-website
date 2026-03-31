@@ -1,0 +1,46 @@
+{
+  "name": "phoenix-website",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Phoenix Boosting Frontend/Backend",
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "prisma": {
+    "schema": "src/backend/prisma/schema.prisma"
+  },
+  "scripts": {
+    "dev": "node src/backend/server.js",
+    "start": "NODE_ENV=production node src/backend/server.js",
+    "build": "vite build --config vite.config.mjs",
+    "preview": "vite preview --config vite.config.mjs",
+    "clean": "rimraf dist node_modules",
+    "prisma:generate": "prisma generate --schema src/backend/prisma/schema.prisma",
+    "prisma:migrate": "prisma migrate dev --schema src/backend/prisma/schema.prisma",
+    "prisma:studio": "prisma studio --schema src/backend/prisma/schema.prisma",
+    "postinstall": "prisma generate --schema src/backend/prisma/schema.prisma"
+  },
+  "dependencies": {
+    "@prisma/client": "^6.16.3",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "express-session": "^1.18.2",
+    "luxon": "^3.7.2",
+    "morgan": "^1.10.1",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-router-dom": "^6.26.2"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4.1.14",
+    "@vitejs/plugin-react": "^5.0.4",
+    "autoprefixer": "^10.4.20",
+    "postcss": "^8.4.44",
+    "prisma": "^6.16.3",
+    "rimraf": "^5.0.7",
+    "tailwindcss": "^4.1.14",
+    "vite": "^5.4.10",
+    "vite-express": "^0.21.1"
+  }
+}
